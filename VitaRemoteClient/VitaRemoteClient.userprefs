@@ -1,0 +1,68 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="VitaRemoteClient\Packet\SendPacket.cs">
+    <Files>
+      <File FileName="VitaRemoteClient\TCPConnection.cs" Line="368" Column="8" />
+      <File FileName="VitaRemoteClient\Packet\SendPacket.cs" Line="197" Column="32" />
+      <File FileName="VitaRemoteClient\AppMain.cs" Line="77" Column="16" />
+      <File FileName="c:\Users\Erick\Documents\Projects\PS VITA REMOTE DESKTOP\VitaRemoteClient\VitaRemoteClient\Draw.cs" Line="147" Column="4" />
+      <File FileName="VitaRemoteClient\Frame.cs" Line="53" Column="32" />
+      <File FileName="c:\Users\Erick\Documents\Projects\PS VITA REMOTE DESKTOP\VitaRemoteClient\VitaRemoteClient\Packet\Packet.cs" Line="83" Column="4" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="VitaRemoteClient" expanded="True">
+            <Node name="Packet" expanded="True">
+              <Node name="SendPacket.cs" selected="True" />
+            </Node>
+            <Node name="shaders" expanded="True" />
+            <Node name="UI" expanded="True">
+              <Node name="Dialog" expanded="True" />
+            </Node>
+            <Node name="test.png">
+              <Option id="ShowVersionControlOverlays" value="True" />
+              <Option id="ShowAllFiles" value="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="ClassPad">
+        <State expanded="True" selected="True" />
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State>
+          <Value>packet</Value>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="C:\Users\Erick\Documents\Projects\PS VITA REMOTE DESKTOP\VitaRemoteClient\VitaRemoteClient\TCPConnection.cs" line="279" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches>
+    <Watch file="VitaRemoteClient\TCPConnection.cs" line="239" offsetX="693" offsetY="4094" expression="packetLen" liveUpdate="False" />
+    <Watch file="VitaRemoteClient\TCPConnection.cs" line="239" offsetX="654" offsetY="4064" expression="(totalLen - pos" liveUpdate="False" />
+    <Watch file="VitaRemoteClient\TCPConnection.cs" line="234" offsetX="647" offsetY="3977" expression="pos" liveUpdate="False" />
+    <Watch file="VitaRemoteClient\TCPConnection.cs" line="241" offsetX="858" offsetY="4117" expression="recvBuffer" liveUpdate="False" />
+    <Watch file="VitaRemoteClient\TCPConnection.cs" line="447" offsetX="525" offsetY="7582" expression="pos" liveUpdate="False" />
+    <Watch file="VitaRemoteClient\Packet\Packet.cs" line="85" offsetX="493" offsetY="1349" expression="_Data" liveUpdate="False" />
+    <Watch file="VitaRemoteClient\TCPConnection.cs" line="223" offsetX="466" offsetY="3777" expression="len" liveUpdate="False" />
+    <Watch file="VitaRemoteClient\TCPConnection.cs" line="223" offsetX="555" offsetY="3769" expression="pos" liveUpdate="False" />
+    <Watch file="VitaRemoteClient\TCPConnection.cs" line="224" offsetX="495" offsetY="3805" expression="packetLen" liveUpdate="False" />
+    <Watch file="VitaRemoteClient\TCPConnection.cs" line="225" offsetX="503" offsetY="3836" expression="totalLen" liveUpdate="False" />
+    <Watch file="VitaRemoteClient\TCPConnection.cs" line="229" offsetX="706" offsetY="3712" expression="headerBuffer" liveUpdate="False" />
+    <Watch file="VitaRemoteClient\TCPConnection.cs" line="246" offsetX="457" offsetY="4093" expression="len" liveUpdate="False" />
+    <Watch file="VitaRemoteClient\TCPConnection.cs" line="466" offsetX="545" offsetY="7838" expression="halfWay" liveUpdate="False" />
+    <Watch file="VitaRemoteClient\TCPConnection.cs" line="463" offsetX="546" offsetY="7873" expression="packet.header.size" liveUpdate="False" />
+    <Watch file="c:\Users\Erick\Documents\Projects\PS VITA REMOTE DESKTOP\VitaRemoteClient\VitaRemoteClient\Draw.cs" line="156" offsetX="649" offsetY="2642" expression="textTexture.IsRenderable" liveUpdate="False" />
+    <Watch file="VitaRemoteClient\TCPConnection.cs" line="477" offsetX="833" offsetY="7616" expression="packet.Data" liveUpdate="False" />
+    <Watch file="VitaRemoteClient\TCPConnection.cs" line="477" offsetX="833" offsetY="7616" expression="packet._Data" liveUpdate="False" />
+    <Watch file="VitaRemoteClient\TCPConnection.cs" line="477" offsetX="833" offsetY="7616" expression="packet._Data" liveUpdate="False" />
+    <Watch file="VitaRemoteClient\TCPConnection.cs" line="498" offsetX="406" offsetY="7952" expression="Message" liveUpdate="False" />
+    <Watch file="VitaRemoteClient\TCPConnection.cs" line="250" offsetX="1317" offsetY="4233" expression="totalLen" liveUpdate="False" />
+    <Watch file="VitaRemoteClient\TCPConnection.cs" line="250" offsetX="1317" offsetY="4233" expression="totalLen" liveUpdate="False" />
+  </MonoDevelop.Ide.DebuggingService.PinnedWatches>
+</Properties>
