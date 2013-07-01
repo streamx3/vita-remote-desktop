@@ -26,11 +26,84 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 using System;
+using System.Runtime.InteropServices;
 using Sce.PlayStation.Core.Input;
 using Sce.PlayStation.Core;
 
 namespace VitaRemoteClient
 {
+	//[StructLayout(LayoutKind.Explicit)]
+	public class GamepadPacketData
+	{
+		private uint m_unButtonState;
+		private float m_fLeftAnalogX;
+		private float m_fLeftAnalogY;
+		private float m_fRightAnalogX;
+		private float m_fRightAnalogY;
+		private byte[] m_Raw = new byte[20];
+		
+		public uint ButtonState
+		{
+			get { return m_unButtonState;}
+			set 
+			{
+				m_unButtonState = value;
+				Buffer.BlockCopy(BitConverter.GetBytes(m_unButtonState), 0, m_Raw, 0, 4);
+			}
+		}
+		
+		public float LeftAnalogX
+		{
+			get{ return m_fLeftAnalogX; }
+			set
+			{
+				m_fLeftAnalogX = value;
+				Buffer.BlockCopy(BitConverter.GetBytes(m_fLeftAnalogX), 0, m_Raw, 4, 4);
+			}
+		}
+		public float LeftAnalogY
+		{
+			get{ return m_fLeftAnalogY; }
+			set
+			{
+				m_fLeftAnalogY = value;
+				Buffer.BlockCopy(BitConverter.GetBytes(m_fLeftAnalogY), 0, m_Raw, 8, 4);
+			}
+		}
+		public float RightAnalogX
+		{
+			get{ return m_fRightAnalogX; }
+			set
+			{
+				m_fRightAnalogX = value;
+				Buffer.BlockCopy(BitConverter.GetBytes(m_fRightAnalogX), 0, m_Raw, 12, 4);
+			}
+		}
+		public float RightAnalogY
+		{
+			get{ return m_fRightAnalogY; }
+			set
+			{
+				m_fRightAnalogY = value;
+				Buffer.BlockCopy(BitConverter.GetBytes(m_fRightAnalogY), 0, m_Raw, 16, 4);
+			}
+		}
+		
+		public byte[] Raw
+		{
+			get { return m_Raw;}
+			set 
+			{
+				m_Raw = value;
+				Buffer.BlockCopy(m_Raw, 0, BitConverter.GetBytes(m_unButtonState), 0, 4);
+				Buffer.BlockCopy(m_Raw, 4, BitConverter.GetBytes(m_fLeftAnalogX), 0, 4);
+				Buffer.BlockCopy(m_Raw, 8, BitConverter.GetBytes(m_fLeftAnalogY), 0, 4);
+				Buffer.BlockCopy(m_Raw, 12, BitConverter.GetBytes(m_fRightAnalogX), 0, 4);
+				Buffer.BlockCopy(m_Raw, 16, BitConverter.GetBytes(m_fRightAnalogY), 0, 4);
+			}
+		}		
+	};
+	
 	public static class Input
 	{
 //		private static int PSV_BTN_UP;
@@ -50,11 +123,45 @@ namespace VitaRemoteClient
 		private static int inputType = 0;  // 0 = keyboardmouse 1 = gamepad;
 		private static int motionSensitivity = 10;
 		
+		private static GamepadPacketData prevGamepadData = new GamepadPacketData();
+		
 		public static void UpdateGamepadState()
 		{
 			var gamepadData = GamePad.GetData(0);
 			
+			GamepadPacketData padData = new GamepadPacketData();
 			
+			// turn on the bool bits
+			uint unButtonState = 0;
+			unButtonState |= (uint)(gamepadData.Buttons & GamePadButtons.Left);
+			unButtonState |= (uint)(gamepadData.Buttons & GamePadButtons.Right);
+			unButtonState |= (uint)(gamepadData.Buttons & GamePadButtons.Up);
+			unButtonState |= (uint)(gamepadData.Buttons & GamePadButtons.Down);
+			unButtonState |= (uint)(gamepadData.Buttons & GamePadButtons.Square);
+			unButtonState |= (uint)(gamepadData.Buttons & GamePadButtons.Cross);
+			unButtonState |= (uint)(gamepadData.Buttons & GamePadButtons.Circle);
+			unButtonState |= (uint)(gamepadData.Buttons & GamePadButtons.Triangle);
+			unButtonState |= (uint)(gamepadData.Buttons & GamePadButtons.L);
+			unButtonState |= (uint)(gamepadData.Buttons & GamePadButtons.R);
+			unButtonState |= (uint)(gamepadData.Buttons & GamePadButtons.Select);
+			unButtonState |= (uint)(gamepadData.Buttons & GamePadButtons.Start);
+			padData.ButtonState = unButtonState;
+			
+			// copy the analog values
+			padData.LeftAnalogX = gamepadData.AnalogLeftX;
+			padData.LeftAnalogY = gamepadData.AnalogLeftY;
+			padData.RightAnalogX = gamepadData.AnalogRightX;
+			padData.RightAnalogY = gamepadData.AnalogRightY;
+			
+			// send
+			bool compResult = padData.Raw.CompareBytes(prevGamepadData.Raw);
+			if(compResult == true)
+			{
+			   SendPacket.sendGamePadInput(padData.Raw);
+			}
+			prevGamepadData.Raw = padData.Raw;
+
+			/*
 			byte[] data = new byte[16];
 			
 			data[0] = (byte)(((gamepadData.Buttons & GamePadButtons.Left) != 0) 		? 1:0);
@@ -69,6 +176,11 @@ namespace VitaRemoteClient
 			data[9] = (byte)(((gamepadData.Buttons & GamePadButtons.R) != 0) 			? 1:0);
 			data[10] = (byte)(((gamepadData.Buttons & GamePadButtons.Select) != 0) 		? 1:0);
 			data[11] = (byte)(((gamepadData.Buttons & GamePadButtons.Start) != 0)		? 1:0);
+			
+			data[12] = (byte)(gamepadData.AnalogLeftX);
+			data[13] = (byte)(gamepadData.AnalogLeftY);
+			data[14] = (byte)(gamepadData.AnalogRightX);
+			data[15] = (byte)(gamepadData.AnalogRightY);
 			
 			if(inputType == 0)
 			{
@@ -119,8 +231,9 @@ namespace VitaRemoteClient
 					data[12] = (byte)(((127 * gamepadData.AnalogLeftX) *-1f) + 127);
 					
 			}
-			
-			if((gamepadData.Buttons & GamePadButtons.L) != 0)
+			*/
+			/*
+			if((gamepadData.Buttons & GamePadButtons.L) != 0 && false)
 			{
 				var motionData = Motion.GetData(0);
 				Vector3 vel = motionData.AngularVelocity;
@@ -137,12 +250,13 @@ namespace VitaRemoteClient
 				
 				SendPacket.sendSensorData(avX,avY,avZ,aX,aY,aZ);
 			}
-
+			 */
 			//data[12] = (byte)(gamepadData.AnalogLeftX);
 			//data[13] = (byte)(gamepadData.AnalogLeftY);
 			//data[14] = (byte)(gamepadData.AnalogRightX);
 			//data[15] = (byte)(gamepadData.AnalogRightY);
 			
+			/*
 			if(_prevData != null)
 			{
 				if(data.CompareBytes(_prevData))
@@ -154,6 +268,7 @@ namespace VitaRemoteClient
 			}
 			
 			_prevData = data;
+			*/
 //			int left = ((gamepadData.Buttons & GamePadButtons.Left) != 0) 			? 1:0;
 //			int right = ((gamepadData.Buttons & GamePadButtons.Right) != 0) 		? 1:0;
 //			int up = ((gamepadData.Buttons & GamePadButtons.Up) != 0) 				? 1:0;

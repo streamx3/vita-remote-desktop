@@ -198,7 +198,7 @@ bool CServer::Recieve()
 		{
 			Lock(CS_ClientSocket);
 				//m_nRet = recv(m_clientSocket, (char*)&pData + bytesRecv, (int)tempHeader.size - CPacket::GetHeaderSize(), 0);
-				m_nRet = recv(m_clientSocket, (char*)&m_pRecvPacket + bytesRecv, (int)tempHeader.size - CPacket::GetHeaderSize(), 0);
+				m_nRet = recv(m_clientSocket, m_pRecvPacket + bytesRecv, (int)tempHeader.size - CPacket::GetHeaderSize(), 0);
 			UnLock(CS_ClientSocket);
 
 			if(m_nRet == SOCKET_ERROR)
@@ -271,6 +271,11 @@ void CServer::Parse()
 			} break;
 		case 301: // sendGamePadInput
 			{
+				// get the packet data for hte input
+				GamePadPacketData data;
+				memcpy_s(&data, sizeof(GamePadPacketData), (m_pRecvPacket + sizeof(PacketHeader)), header.size - sizeof(PacketHeader));
+
+				m_Input.UpdateButtonState(data);
 			} break;
 		case 302: // sendSensorData
 			{

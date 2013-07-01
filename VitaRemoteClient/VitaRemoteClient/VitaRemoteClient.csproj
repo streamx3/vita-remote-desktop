@@ -62,11 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <PsmMetadata Include="app.xml" />
-    <Content Include="12.jpg" />
     <Content Include="test.png" />
     <Content Include="test2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="VitaRemoteDesktopClientLib.dll" />
   </ItemGroup>
 </Project>

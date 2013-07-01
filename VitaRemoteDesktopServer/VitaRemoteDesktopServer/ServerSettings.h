@@ -29,11 +29,15 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define LEAN_AND_MEAN
 #include <Windows.h>
 
+#include <map>
+#include "VitaInput.h"
+
 class CCaptureDX;
 
 class CServerSettings
 {
 	friend class CCaptureDX;
+	friend class CVitaInput;
 private:
 	unsigned int m_unScreenWidth;
 	unsigned int m_unScreenHeight;
@@ -44,7 +48,8 @@ private:
 	unsigned int m_unDestinationWidth;
 	unsigned int m_unDestinationHeight;
 
-	
+	std::map<CVitaInput::GamePadButtons, char> m_KeyBinding;
+
 	RECT m_ScreenRect;
 	RECT m_CaptureRect;
 	RECT m_DestinationRect; // the vita screen size of 960x544
@@ -56,5 +61,7 @@ private:
 public:
 	~CServerSettings(void);
 	static CServerSettings* GetInstance();
+
+
 };
 

@@ -29,6 +29,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <WinSock.h>
 #include <queue>
 
+#include "VitaInput.h"
+
 class CServer
 {
 private:
@@ -63,6 +65,9 @@ private:
 	CRITICAL_SECTION CS_ClientSocket;
 	void Lock(CRITICAL_SECTION& CS);
 	void UnLock(CRITICAL_SECTION& CS);
+
+	// recv from vita
+	CVitaInput m_Input;
 
 public:
 	CServer(void);

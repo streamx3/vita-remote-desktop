@@ -83,6 +83,7 @@ DWORD WINAPI CaptureThread(LPVOID d)
 	
 	printf("Shutting down the Capture Device...\n");
 	captureObj.Shutdown();
+	return 0;
 }
 
 int main(int argc, char* argv[])
@@ -100,7 +101,7 @@ int main(int argc, char* argv[])
 	CServer server;
 		
 	printf("Starting socket initializations...\n");
-	bRunning = server.Init(8080, 10);
+	bRunning = server.Init(8081, 10);
 
 	if(bRunning == false)
 	{

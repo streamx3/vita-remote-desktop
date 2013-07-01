@@ -82,16 +82,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CaptureDX.cpp" />
+    <ClCompile Include="KeyboardMessenger.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Packet.cpp" />
     <ClCompile Include="Server.cpp" />
     <ClCompile Include="ServerSettings.cpp" />
+    <ClCompile Include="VitaInput.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CaptureDX.h" />
+    <ClInclude Include="KeyboardMessenger.h" />
     <ClInclude Include="Packet.h" />
     <ClInclude Include="Server.h" />
     <ClInclude Include="ServerSettings.h" />
+    <ClInclude Include="VitaInput.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

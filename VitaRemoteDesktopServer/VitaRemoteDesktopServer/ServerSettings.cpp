@@ -62,6 +62,21 @@ CServerSettings::CServerSettings(void)
 	m_DestinationRect.top = 0;
 	m_DestinationRect.bottom = m_unDestinationHeight;
 
+	// TODO: Load these in from a file
+	// the key bindings
+	m_KeyBinding[CVitaInput::DPadLeft]	= 'a';
+	m_KeyBinding[CVitaInput::DPadUp]	= 'w';
+	m_KeyBinding[CVitaInput::DPadRight] = 'd';
+	m_KeyBinding[CVitaInput::DPadDown]	= 's';
+	m_KeyBinding[CVitaInput::Square]	= '2';
+	m_KeyBinding[CVitaInput::Triangle]	= '4';
+	m_KeyBinding[CVitaInput::Circle]	= '3';
+	m_KeyBinding[CVitaInput::Cross]		= '1';
+	m_KeyBinding[CVitaInput::Start]		= VK_RETURN;
+	m_KeyBinding[CVitaInput::Select]	= VK_SHIFT;
+	m_KeyBinding[CVitaInput::L]			= 'q';
+	m_KeyBinding[CVitaInput::R]			= 'e';
+
 }
 
 CServerSettings::~CServerSettings(void)
