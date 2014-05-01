@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<application project_name="VitaRemoteDesktop" version="1.00" runtime_version="1.11" sdk_version="1.11.01" default_locale="en-US">
+<application project_name="VitaRemoteDesktop" version="1.00" runtime_version="1.21" sdk_version="1.21.02" default_locale="en-US">
   <name>
     <localized_item locale="en-US" value="Remote Desktop" />
     <localized_item locale="en-GB" value="Remote Desktop" />
@@ -35,4 +35,5 @@
     <feature value="Touch" />
     <feature value="Motion" />
   </feature_list>
+  <psn_service_list />
 </application>

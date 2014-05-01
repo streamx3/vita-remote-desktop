@@ -71,7 +71,7 @@ bool CServer::Init(unsigned short port, unsigned int connectionCount)
 	// non binding
 	u_long iMode=1;
 	ioctlsocket(m_listenSocket, FIONBIO, &iMode);
-	
+
 	// fill out hte server information
 	m_serverInfo.sin_family = AF_INET;
 	m_serverInfo.sin_addr.s_addr = INADDR_ANY; // we are listening for all addresses
@@ -98,9 +98,31 @@ bool CServer::Init(unsigned short port, unsigned int connectionCount)
 		WSACleanup();
 		return false;
 	}
-	
+
+    // get our hostname
+    char ac[80];
+    m_nRet = gethostname(ac, sizeof(ac));
+	if(m_nRet == SOCKET_ERROR)
+	{
+		m_nRet = WSAGetLastError();
+		ReportError(m_nRet, "gethostname()");
+		WSACleanup();
+		return false;
+	}
+    printf("Host name is %s\n", ac);
+
+    // get the address
+    struct hostent *phe = gethostbyname(ac);
+    if (phe != NULL)
+    {
+        struct in_addr addr;
+        memcpy(&addr, phe->h_addr_list[0], sizeof(struct in_addr));
+        printf("Listening on address %s:%d\n", inet_ntoa(addr), m_Port);
+    }
+
 	InitializeCriticalSection(&CS_PacketQueue);
 	InitializeCriticalSection(&CS_ClientSocket);
+	InitializeCriticalSection(&CS_Variables);
 
 	printf("Waiting for a client...\n");
 
@@ -111,7 +133,7 @@ bool CServer::WaitForClient()
 	// wait for a client to connect
 	Lock(CS_ClientSocket);
 		m_clientSocket = accept(m_listenSocket, NULL, NULL);
-	
+
 		if(m_clientSocket == SOCKET_ERROR)
 		{
 	UnLock(CS_ClientSocket);
@@ -142,6 +164,7 @@ void CServer::Shutdown()
 
 	DeleteCriticalSection(&CS_PacketQueue);
 	DeleteCriticalSection(&CS_ClientSocket);
+	DeleteCriticalSection(&CS_Variables);
 
 	closesocket(m_clientSocket);
 	closesocket(m_listenSocket);
@@ -215,12 +238,12 @@ bool CServer::Recieve()
 		} while(bytesRecv < tempHeader.size);
 	}
 	return true;
-	
+
 }
 /*
  * Out packet IDs
  * NOTE: 501 -> 507 send intX and intY
- *     : 
+ *     :
  * 501 - // sendTap
  * 502 - // sendDoubleTap
  * 503 - // sendDrag1
@@ -267,13 +290,16 @@ void CServer::Parse()
 		case 401: // sendReady
 			{
 				//printf("Client is ready to start recieving data\n");
-				m_bClientReady = true;
+				Lock(CS_Variables);
+                    m_bClientReady = true;
+				UnLock(CS_Variables);
 			} break;
 		case 301: // sendGamePadInput
 			{
 				// get the packet data for hte input
 				GamePadPacketData data;
-				memcpy_s(&data, sizeof(GamePadPacketData), (m_pRecvPacket + sizeof(PacketHeader)), header.size - sizeof(PacketHeader));
+				// OLD: memcpy(&data, sizeof(GamePadPacketData), (m_pRecvPacket + sizeof(PacketHeader)), header.size - sizeof(PacketHeader));
+				memcpy(&data, (m_pRecvPacket + sizeof(PacketHeader)), header.size - sizeof(PacketHeader));
 
 				m_Input.UpdateButtonState(data);
 			} break;

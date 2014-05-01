@@ -1,6 +1,8 @@
-#pragma once
+#ifndef _VITAINPUT_H_
+#define _VITAINPUT_H_
 
 #include <Windows.h> // for INPUT
+
 
 struct GamePadPacketData
 {
@@ -11,16 +13,15 @@ struct GamePadPacketData
 	float fRightAnalogY;
 };
 
-
 class CVitaInput
 {
 public:
-	static enum TouchStatus { None, Down, Up, Move, Canceled };
-	static enum GamePadButtons 
-	{ 
-		DPadLeft	= 1 << 0,  DPadUp	 = 1 << 1, DPadRight = 1 << 2,  DPadDown	= 1 << 3, 
-		Square		= 1 << 4,  Triangle  = 1 << 5, Circle    = 1 << 6,  Cross		= 1 << 7, 
-		Start		= 1 << 8,  Select	 = 1 << 9, L		 = 1 << 10, R			= 1 << 11, 
+	enum TouchStatus { None, Down, Up, Move, Canceled };
+	enum GamePadButtons
+	{
+		DPadLeft	= 1 << 0,  DPadUp	 = 1 << 1, DPadRight = 1 << 2,  DPadDown	= 1 << 3,
+		Square		= 1 << 4,  Triangle  = 1 << 5, Circle    = 1 << 6,  Cross		= 1 << 7,
+		Start		= 1 << 8,  Select	 = 1 << 9, L		 = 1 << 10, R			= 1 << 11,
 		//Enter		= 1 << 16, Back		 = 1 << 17,
 		TotalButtons = 12 // 14 if uncommented
 	};
@@ -45,3 +46,4 @@ public:
 	bool ButtonReleased(GamePadButtons btn);
 };
 
+#endif // _VITAINPUT_H_

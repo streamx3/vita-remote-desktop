@@ -1,5 +1,6 @@
 #include "VitaInput.h"
 #include <string.h> // for memset
+#include <stdio.h>
 #include "ServerSettings.h"
 
 #define HANDLEBUTTON(btn, settings)\
@@ -13,7 +14,7 @@ CVitaInput::CVitaInput(void)
 	memset(&m_CurState, 0, sizeof(GamePadPacketData));
 	memset(&m_PrevState, 0, sizeof(GamePadPacketData));
 
-	
+
     // Set up a generic keyboard event.
     m_KeyEvent.type = INPUT_KEYBOARD;
     m_KeyEvent.ki.wScan = 0;
@@ -29,8 +30,8 @@ CVitaInput::~CVitaInput(void)
 void CVitaInput::UpdateButtonState(GamePadPacketData &data)
 {
 	unsigned int GPSize = sizeof(GamePadPacketData);
-	memcpy_s(&m_PrevState, GPSize, &m_CurState, GPSize);
-	memcpy_s(&m_CurState, GPSize, &data, GPSize);
+	memcpy(&m_PrevState, &m_CurState, GPSize);
+	memcpy(&m_CurState, &data, GPSize);
 
 	// handle each button event
 	CServerSettings* settings = CServerSettings::GetInstance();

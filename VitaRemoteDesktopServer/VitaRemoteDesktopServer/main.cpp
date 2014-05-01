@@ -27,7 +27,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <Windows.h>
 #include <stdio.h>
-#include <vld.h>
+#include <cstring>
+//#include <vld.h>
 #include "ServerSettings.h"
 #include "CaptureDX.h"
 #include "Server.h"
@@ -36,7 +37,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define return system("pause"); return
 #endif
 
-const char* szWindowTitle = "Remote Desktop Server";    
+const char* szWindowTitle = "Remote Desktop Server";
 
 struct ThreadData
 {
@@ -48,10 +49,10 @@ struct ThreadData
 DWORD WINAPI CaptureThread(LPVOID d)
 {
 	ThreadData &data = *(ThreadData*)d;
-	
+
 	printf("Initializing the Capture Device...\n");
 
-	
+
 	HWND consoleHandle;
 	CCaptureDX captureObj;
 	HRESULT error = 0;
@@ -71,8 +72,8 @@ DWORD WINAPI CaptureThread(LPVOID d)
 	bool bClientReady = false;
 	while(*data.bRunning)
 	{
-		bClientReady = data.server->ClientConnected() && data.server->ClientReady();
-		if(bClientReady)
+		bClientReady = data.server->ClientConnected();// && data.server->ClientReady();
+		if(bClientReady == true)
 		{
 			(*data.netFPS)++;
 			captureObj.Run();
@@ -80,7 +81,7 @@ DWORD WINAPI CaptureThread(LPVOID d)
 			data.server->Send();
 		}
 	}
-	
+
 	printf("Shutting down the Capture Device...\n");
 	captureObj.Shutdown();
 	return 0;
@@ -99,9 +100,9 @@ int main(int argc, char* argv[])
 	DWORD curTime = 0;
 	DWORD prevTime = 0;
 	CServer server;
-		
+
 	printf("Starting socket initializations...\n");
-	bRunning = server.Init(8081, 10);
+	bRunning = server.Init(8080, 10);
 
 	if(bRunning == false)
 	{
@@ -128,14 +129,14 @@ int main(int argc, char* argv[])
 		if(curTime - prevTime > 1000)
 		{
 			memset(&titleBuffer, 0, 255);
-			sprintf_s(titleBuffer, 255, "%s - fps: %d - Network %d", szWindowTitle, frameCount, netFPS);
+			snprintf(titleBuffer, 255, "%s - fps: %d - Network %d", szWindowTitle, frameCount, netFPS);
 			netFPS = 0;
 			SetConsoleTitle(titleBuffer);
 			prevTime = curTime;
 			frameCount = 0;
 		}
 		///////////////////////////////////////////////////////////////////////
-		
+
 		if(bHaveClient == false)
 		{
 			bHaveClient = server.WaitForClient();
@@ -153,24 +154,26 @@ int main(int argc, char* argv[])
 			}
 
 
-			/*
+
 			// ensure the client is ready to recieve
 			if(server.ClientReady() == true)
 			{
+			    /*
 				// get the screenshots
-				//captureObj.Run();
+				captureObj.Run();
 
 				// count the sent packets per sec
-				//netCount++;
+				netCount++;
 
 				// Send the Screenshots
-				//captureObj.SendScreenPackets(&server);
-				//server.Send();
+				captureObj.SendScreenPackets(&server);
+				server.Send();
+				*/
 			}
 			else
 			{
 			}
-			*/
+
 
 		}
 		// check for an exit
@@ -186,6 +189,6 @@ int main(int argc, char* argv[])
 
 	printf("Shutting down the server...\n");
 	server.Shutdown();
-	
+    system("sleep 3");
 	return 0;
 }

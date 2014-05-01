@@ -25,7 +25,8 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#pragma once
+#ifndef PACKET_H_
+#define PACKET_H_
 
 //server packet header 8 bytes
 //        RZ                  0000                      00                  000000000000000000000000000
@@ -64,10 +65,11 @@ private:
 public:
 
 	// NOTE: automatically adds sizeof(PacketHeader)
-	// in: number of bytes 
+	// in: number of bytes
 	// ret: pointer to data
 	static char* RequestPacket(unsigned int sizeRequested, unsigned short packetID);
 
 	static inline unsigned int GetHeaderSize() { return m_unHeaderSize;}
 };
 
+#endif

@@ -1,0 +1,115 @@
+# depslib dependency file v1.0
+1398909839 source:c:\users\erick\documents\projects\vita-remote-desktop\vitaremotedesktopserver\vitaremotedesktopserver\capturedx.cpp
+	"CaptureDX.h"
+	<d3dx9.h>
+	<d3dx9tex.h>
+	"Packet.h"
+	"Server.h"
+	<fstream>
+
+1398908619 c:\users\erick\documents\projects\vita-remote-desktop\vitaremotedesktopserver\vitaremotedesktopserver\capturedx.h
+	<Windows.h>
+	"ServerSettings.h"
+
+1398908730 c:\users\erick\documents\projects\vita-remote-desktop\vitaremotedesktopserver\vitaremotedesktopserver\serversettings.h
+	<Windows.h>
+	<map>
+	"VitaInput.h"
+
+1398909795 c:\users\erick\documents\projects\vita-remote-desktop\vitaremotedesktopserver\vitaremotedesktopserver\vitainput.h
+	<Windows.h>
+
+1274308617 c:\sdks\microsoft directx sdk (june 2010)\include\d3dx9.h
+	<limits.h>
+	"d3d9.h"
+	"d3dx9math.h"
+	"d3dx9core.h"
+	"d3dx9xof.h"
+	"d3dx9mesh.h"
+	"d3dx9shader.h"
+	"d3dx9effect.h"
+	"d3dx9tex.h"
+	"d3dx9shape.h"
+	"d3dx9anim.h"
+
+1274308617 c:\sdks\microsoft directx sdk (june 2010)\include\d3d9.h
+	<stdlib.h>
+	<objbase.h>
+	<windows.h>
+	"d3d9types.h"
+	"d3d9caps.h"
+
+1274308617 c:\sdks\microsoft directx sdk (june 2010)\include\d3d9types.h
+	<float.h>
+
+1274308617 c:\sdks\microsoft directx sdk (june 2010)\include\d3d9caps.h
+
+1274308617 c:\sdks\microsoft directx sdk (june 2010)\include\d3dx9math.h
+	"d3dx9.h"
+	<math.h>
+	"d3dx9math.inl"
+
+1274308617 c:\sdks\microsoft directx sdk (june 2010)\include\d3dx9math.inl
+
+1274308617 c:\sdks\microsoft directx sdk (june 2010)\include\d3dx9core.h
+	"d3dx9.h"
+
+1274308617 c:\sdks\microsoft directx sdk (june 2010)\include\d3dx9xof.h
+	"d3dx9.h"
+
+1274308617 c:\sdks\microsoft directx sdk (june 2010)\include\d3dx9mesh.h
+	"d3dx9.h"
+
+1274308617 c:\sdks\microsoft directx sdk (june 2010)\include\d3dx9shader.h
+	"d3dx9.h"
+
+1274308617 c:\sdks\microsoft directx sdk (june 2010)\include\d3dx9effect.h
+	"d3dx9.h"
+
+1274308617 c:\sdks\microsoft directx sdk (june 2010)\include\d3dx9tex.h
+	"d3dx9.h"
+
+1274308617 c:\sdks\microsoft directx sdk (june 2010)\include\d3dx9shape.h
+	"d3dx9.h"
+
+1274308617 c:\sdks\microsoft directx sdk (june 2010)\include\d3dx9anim.h
+
+1398908671 c:\users\erick\documents\projects\vita-remote-desktop\vitaremotedesktopserver\vitaremotedesktopserver\packet.h
+	<stdlib.h>
+
+1398914536 c:\users\erick\documents\projects\vita-remote-desktop\vitaremotedesktopserver\vitaremotedesktopserver\server.h
+	<WinSock.h>
+	<queue>
+	"VitaInput.h"
+
+1398906248 source:c:\users\erick\documents\projects\vita-remote-desktop\vitaremotedesktopserver\vitaremotedesktopserver\keyboardmessenger.cpp
+	"KeyboardMessenger.h"
+
+1398908648 c:\users\erick\documents\projects\vita-remote-desktop\vitaremotedesktopserver\vitaremotedesktopserver\keyboardmessenger.h
+
+1398906248 source:c:\users\erick\documents\projects\vita-remote-desktop\vitaremotedesktopserver\vitaremotedesktopserver\packet.cpp
+	"Packet.h"
+	<assert.h>
+
+1398914618 source:c:\users\erick\documents\projects\vita-remote-desktop\vitaremotedesktopserver\vitaremotedesktopserver\main.cpp
+	<Windows.h>
+	<stdio.h>
+	<cstring>
+	"ServerSettings.h"
+	"CaptureDX.h"
+	"Server.h"
+
+1398914493 source:c:\users\erick\documents\projects\vita-remote-desktop\vitaremotedesktopserver\vitaremotedesktopserver\server.cpp
+	"Server.h"
+	"Packet.h"
+	<stdio.h>
+
+1398906248 source:c:\users\erick\documents\projects\vita-remote-desktop\vitaremotedesktopserver\vitaremotedesktopserver\serversettings.cpp
+	"ServerSettings.h"
+
+1398909793 source:c:\users\erick\documents\projects\vita-remote-desktop\vitaremotedesktopserver\vitaremotedesktopserver\vitainput.cpp
+	"VitaInput.h"
+	<string.h>
+	<stdio.h>
+	"ServerSettings.h"
+

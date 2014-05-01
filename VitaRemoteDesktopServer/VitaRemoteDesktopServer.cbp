@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="VitaRemoteDesktopServer" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/VitaRemoteDesktopServer" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/VitaRemoteDesktopServer" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-std=c++11" />
+			<Add option="-Wall" />
+			<Add option="-ansi" />
+			<Add option="-fexceptions" />
+			<Add option='-D_WIN32_WINNT=&quot;0x0601&quot;' />
+			<Add directory="C:/SDKs/Microsoft DirectX SDK (June 2010)/Include" />
+		</Compiler>
+		<Linker>
+			<Add library="C:\SDKs\Microsoft DirectX SDK (June 2010)\Lib\x86\dinput8.lib" />
+			<Add library="C:\SDKs\Microsoft DirectX SDK (June 2010)\Lib\x86\dxguid.lib" />
+			<Add library="C:\SDKs\Microsoft DirectX SDK (June 2010)\Lib\x86\d3dx9.lib" />
+			<Add library="C:\SDKs\Microsoft DirectX SDK (June 2010)\Lib\x86\d3d9.lib" />
+			<Add library="libws2_32" />
+			<Add directory="C:/SDKs/Microsoft DirectX SDK (June 2010)/Lib/x86" />
+		</Linker>
+		<Unit filename="VitaRemoteDesktopServer/CaptureDX.cpp" />
+		<Unit filename="VitaRemoteDesktopServer/CaptureDX.h" />
+		<Unit filename="VitaRemoteDesktopServer/KeyboardMessenger.cpp" />
+		<Unit filename="VitaRemoteDesktopServer/KeyboardMessenger.h" />
+		<Unit filename="VitaRemoteDesktopServer/Packet.cpp" />
+		<Unit filename="VitaRemoteDesktopServer/Packet.h" />
+		<Unit filename="VitaRemoteDesktopServer/Server.cpp" />
+		<Unit filename="VitaRemoteDesktopServer/Server.h" />
+		<Unit filename="VitaRemoteDesktopServer/ServerSettings.cpp" />
+		<Unit filename="VitaRemoteDesktopServer/ServerSettings.h" />
+		<Unit filename="VitaRemoteDesktopServer/VitaInput.cpp" />
+		<Unit filename="VitaRemoteDesktopServer/VitaInput.h" />
+		<Unit filename="VitaRemoteDesktopServer/main.cpp" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

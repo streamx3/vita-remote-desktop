@@ -25,7 +25,10 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#pragma once
+#ifndef _CAPTUREDX_H_
+#define _CAPTUREDX_H_
+
+
 // This class is used to Init DirextX to capture the screen
 #define LEAN_AND_MEAN
 #define SPLIT_IMAGE 0
@@ -55,7 +58,7 @@ private:
 	// for capturing the screen;
 	IDirect3DSurface9* m_pFinalSurface;
 	IDirect3DSurface9* m_pBufferSurface;
-	
+
 	// to send
 	char* m_Packet;
 
@@ -78,7 +81,7 @@ private:
 	unsigned int m_unPixelDataBufferSize;
 	unsigned int m_unScaledPixelDataBufferSize;
 #endif
-	
+
 	// for resizing
 	struct PixelColor
 	{
@@ -99,3 +102,4 @@ public:
 	void SendScreenPackets(CServer* server);
 };
 
+#endif // _CAPTUREDX_H_

@@ -25,7 +25,9 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#pragma once
+#ifndef _SERVERSETTINGS_H_
+#define _SERVERSETTINGS_H_
+
 #define LEAN_AND_MEAN
 #include <Windows.h>
 
@@ -53,7 +55,7 @@ private:
 	RECT m_ScreenRect;
 	RECT m_CaptureRect;
 	RECT m_DestinationRect; // the vita screen size of 960x544
-	
+
 	// hide constructors to make singleton
 	CServerSettings(void);
 	CServerSettings(CServerSettings&);
@@ -65,3 +67,4 @@ public:
 
 };
 
+#endif

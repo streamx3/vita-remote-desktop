@@ -52,15 +52,15 @@ void CCaptureDX::CaptureScreen(bool bScreenShot)
 
     HRESULT err = m_pDevice->GetFrontBufferData(0, m_pBufferSurface);
 	//HRESULT err = m_pDevice->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &m_pBufferSurface);
-	//D3DXSaveSurfaceToFile("C:/remoteserver/Desktop_BB.bmp", D3DXIFF_BMP, m_pFinalSurface, NULL, NULL); 
+	//D3DXSaveSurfaceToFile("C:/remoteserver/Desktop_BB.bmp", D3DXIFF_BMP, m_pFinalSurface, NULL, NULL);
 	if(err != D3D_OK)
 	{
 		printf("(%d) - Error on GetBackBuffer()\n", err);
 	}
-	
+
 #if AS_BITMAP
-	
-	err = D3DXLoadSurfaceFromSurface(m_pFinalSurface, NULL, NULL, 
+
+	err = D3DXLoadSurfaceFromSurface(m_pFinalSurface, NULL, NULL,
 		m_pBufferSurface, NULL, &m_pSettings.m_CaptureRect, D3DX_FILTER_LINEAR, 0);
 	if(err != D3D_OK)
 	{
@@ -71,7 +71,7 @@ void CCaptureDX::CaptureScreen(bool bScreenShot)
 
 	// create an image from the surface
 	// NOTE: PSM only accepts BMP, JPG, and PNG.
-	// BMP makes a large packet, and PNG takes too long to create 
+	// BMP makes a large packet, and PNG takes too long to create
 	LPD3DXBUFFER DXBuffer = NULL;
 	err = D3DXSaveSurfaceToFileInMemory(&DXBuffer, D3DXIFF_JPG, m_pFinalSurface, NULL, &m_pSettings.m_CaptureRect);
 	if(err != MB_OK)
@@ -106,7 +106,7 @@ void CCaptureDX::CaptureScreen(bool bScreenShot)
 		// build the file naem
 		char buffer[128] = {0};
 		static int frameNumber = 0;
-		sprintf_s(buffer, 128, "C:/remoteserver/clean/Desktop_RAW_%d.jpg", frameNumber++);
+		sprintf(buffer, "C:/remoteserver/clean/Desktop_RAW_%d.jpg", frameNumber++);
 
 		// write it out
 		std::fstream out;
@@ -115,7 +115,7 @@ void CCaptureDX::CaptureScreen(bool bScreenShot)
 		out.clear();
 		out.close();
 	}
-	
+
 #else
 	// NOTE: This area would need updated if decided to use
 	RECT tmpRect;
@@ -211,7 +211,7 @@ int CCaptureDX::Init(HWND windowHandle)
 	m_pScaledPixelDataLeft = malloc(m_unScaledPixelDataBufferSize);
 	m_pScaledPixelDataRight = malloc(m_unScaledPixelDataBufferSize);
 #else
-	
+
 #if !AS_BITMAP
 	// allocate the buffer for the cropped image(source size and position)
 	m_unPixelDataBufferSize = (m_pSettings.m_unScreenWidth) * m_pSettings.m_unScreenHeight * (BITSPERPIXEL / 8);

@@ -25,7 +25,9 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#pragma once
+#ifndef _SERVER_H_
+#define _SERVER_H_
+
 #include <WinSock.h>
 #include <queue>
 
@@ -54,15 +56,16 @@ private:
 	std::queue<char*> m_PacketQueue;
 	char* m_pRecvPacket;
 	volatile bool m_bClientConnected;
-	volatile bool m_bClientReady;
+	bool m_bClientReady;
 
 	void ReportError(int errorCode, const char *whichFunc);
 	void ConnectionLost();
 
-	
+
 	// thread safe
 	CRITICAL_SECTION CS_PacketQueue;
 	CRITICAL_SECTION CS_ClientSocket;
+	CRITICAL_SECTION CS_Variables;
 	void Lock(CRITICAL_SECTION& CS);
 	void UnLock(CRITICAL_SECTION& CS);
 
@@ -75,7 +78,7 @@ public:
 
 	bool Init(unsigned short port, unsigned int connectionCount);
 	void Shutdown();
-	
+
 	// states
 	bool WaitForClient();
 	bool Recieve();
@@ -83,8 +86,21 @@ public:
 	void Send();
 
 	void QueuePacket(char* pPacket);
-	inline bool ClientConnected() { return m_bClientConnected;}
-	inline bool ClientReady() { return m_bClientReady;}
-	inline void ClientNotReady() { m_bClientReady = false;}
+	bool ClientConnected() { return m_bClientConnected;}
+	bool ClientReady()
+	{
+	    bool bClientReady = false;
+        Lock(CS_Variables);
+            bClientReady = m_bClientReady;
+        UnLock(CS_Variables);
+	    return bClientReady;
+    }
+	void ClientNotReady()
+	{
+        Lock(CS_Variables);
+            m_bClientReady = false;
+        UnLock(CS_Variables);
+    }
 };
 
+#endif
